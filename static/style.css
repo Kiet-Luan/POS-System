@@ -1,0 +1,139 @@
+/* Custom modern styles for the POS application */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f4f6f8;
+  color: #374151;
+}
+
+/* Navbar styling */
+.navbar {
+  background-color: #1f2937;
+}
+
+.navbar .nav-link {
+  color: #d1d5db;
+  font-weight: 500;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: #ffffff;
+}
+
+/* Card styling */
+.card {
+  border: none;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+}
+
+.card-title {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Button styling */
+.btn-primary {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.btn-primary:hover {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.btn-outline-secondary {
+  color: #6b7280;
+  border-color: #d1d5db;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #f9fafb;
+  border-color: #d1d5db;
+  color: #374151;
+}
+
+.btn-outline-danger {
+  color: #ef4444;
+  border-color: #fecaca;
+}
+
+.btn-outline-danger:hover {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+
+/* Link button (stars) */
+.btn-link {
+  color: #fbbf24;
+  text-decoration: none;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.btn-link:hover {
+  color: #f59e0b;
+  text-decoration: none;
+}
+
+/* Alerts styling */
+.alert-success {
+  background-color: #ecfdf5;
+  color: #065f46;
+  border: none;
+}
+
+.alert-danger {
+  background-color: #fef2f2;
+  color: #991b1b;
+  border: none;
+}
+
+.alert-warning {
+  background-color: #fefce8;
+  color: #92400e;
+  border: none;
+}
+
+.alert-info {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  border: none;
+}
+
+/* Search bar styling */
+.search-bar .form-control {
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.search-bar .btn {
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+/* List group styling */
+.list-group-item {
+  border: none;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Table buttons spacing */
+.table .btn {
+  padding: 0.25rem 0.5rem;
+}

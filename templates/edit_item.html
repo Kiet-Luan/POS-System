@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 class="my-3">Edit Item</h1>
+  <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+    <div class="mb-3">
+      <label for="name" class="form-label">Item Name</label>
+      <input type="text" class="form-control" id="name" name="name" value="{{ item['name'] }}" required>
+      <div class="invalid-feedback">Please enter a name.</div>
+    </div>
+    <div class="mb-3">
+      <label for="price" class="form-label">Price ($)</label>
+      <input type="number" step="0.01" class="form-control" id="price" name="price" value="{{ item['price'] }}" required>
+      <div class="invalid-feedback">Please enter a valid price.</div>
+    </div>
+    <div class="mb-3">
+      <label for="quantity" class="form-label">Quantity</label>
+      <input type="number" class="form-control" id="quantity" name="quantity" min="0" value="{{ item['quantity'] }}" required>
+      <div class="invalid-feedback">Please enter a quantity.</div>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Current Image</label><br>
+      {% if item['image_path'] %}
+        <img src="{{ url_for('static', filename=item['image_path']) }}" alt="Current image" class="img-thumbnail" style="max-width: 200px; height: auto;">
+      {% else %}
+        <img src="{{ url_for('static', filename='placeholder.png') }}" alt="No image" class="img-thumbnail" style="max-width: 200px; height: auto;">
+      {% endif %}
+    </div>
+    <div class="mb-3">
+      <label for="image" class="form-label">Upload New Image (optional)</label>
+      <input type="file" class="form-control" id="image" name="image" accept="image/*">
+      <div class="form-text">Leaving this blank will keep the existing image.</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Item</button>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+  </form>
+  <script>
+    // Bootstrap form validation
+    (() => {
+      'use strict';
+      const forms = document.querySelectorAll('.needs-validation');
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    })();
+  </script>
+{% endblock %}

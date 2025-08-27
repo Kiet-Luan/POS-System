@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 class="my-3">Sales History</h1>
+  {% if not sales %}
+    <p>No sales recorded yet.</p>
+  {% else %}
+    <div class="table-responsive">
+      <table class="table table-striped align-middle">
+        <thead>
+          <tr>
+            <th scope="col">Sale #</th>
+            <th scope="col">Item</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total ($)</th>
+            <th scope="col">Timestamp</th>
+            <th scope="col">Status</th>
+            <th scope="col">Admin Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in sales %}
+          <tr class="{% if row['cancelled'] %}table-danger text-decoration-line-through{% endif %}">
+            <th scope="row">{{ row['id'] }}</th>
+            <td>{{ row['item_name'] }}</td>
+            <td>{{ row['quantity'] }}</td>
+            <td>{{ '%.2f'|format(row['total_price']) }}</td>
+            <td>{{ row['timestamp'] }}</td>
+            <td>
+              {% if row['cancelled'] %}
+                <span class="badge bg-secondary">Cancelled</span>
+              {% else %}
+                <form method="post" action="{{ url_for('cancel_sale', sale_id=row['id']) }}" class="d-inline">
+                  <button type="submit" class="btn btn-sm btn-outline-danger">Cancel</button>
+                </form>
+              {% endif %}
+            </td>
+            <td>
+              {% if row['cancelled'] %}
+                <!-- Uncancel form (requires admin code) -->
+                <form method="post" action="{{ url_for('uncancel_sale', sale_id=row['id']) }}" class="d-flex gap-1 flex-wrap">
+                  <input type="password" name="admin_code" placeholder="Admin Code" class="form-control form-control-sm flex-grow-1" required>
+                  <button type="submit" class="btn btn-sm btn-outline-success">Uncancel</button>
+                </form>
+              {% endif %}
+              <!-- Delete form (always available, requires admin code) -->
+              <form method="post" action="{{ url_for('delete_sale', sale_id=row['id']) }}" class="d-flex gap-1 flex-wrap mt-1">
+                <input type="password" name="admin_code" placeholder="Admin Code" class="form-control form-control-sm flex-grow-1" required>
+                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+{% endblock %}
